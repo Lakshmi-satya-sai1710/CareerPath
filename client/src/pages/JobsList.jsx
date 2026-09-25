@@ -4,13 +4,8 @@ import {
   Briefcase, 
   MapPin, 
   DollarSign, 
-  Clock, 
   Search, 
-  Filter, 
-  CheckCircle2, 
-  AlertCircle, 
   Send, 
-  ExternalLink, 
   Sparkles, 
   Building2,
   Check
@@ -101,7 +96,7 @@ const JobsList = () => {
       if (res.data.success) {
         addToast(`Successfully applied to ${selectedJobForModal.company}!`, 'success');
         setSelectedJobForModal(null);
-        fetchJobs(); // refresh application status
+        fetchJobs();
       }
     } catch (err) {
       const msg = err.response?.data?.message || 'Failed to submit application.';
@@ -118,21 +113,21 @@ const JobsList = () => {
       
       {/* Header */}
       <div>
-        <span className="badge badge-primary" style={{ marginBottom: '0.5rem' }}>Opportunity Hub</span>
-        <h1 style={{ fontSize: '2.25rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
+        <span className="section-tag">OPPORTUNITY HUB</span>
+        <h1 className="section-title">
           Matched Tech Job Openings
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: '1rem', marginTop: '0.35rem' }}>
-          Discover industry roles scored against your verified skill profile.
+        <p className="section-subtitle" style={{ marginTop: '0.35rem' }}>
+          Discover verified roles scored with match percentages against your verified skill profile.
         </p>
       </div>
 
       {/* Search & Filter Toolbar */}
-      <div className="card glass-panel" style={{ padding: '1.25rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="card" style={{ padding: '1.25rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
         
         {/* Search */}
         <div style={{ position: 'relative', flex: '1 1 280px' }}>
-          <Search size={18} color="#64748b" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
+          <Search size={18} color="#839791" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
           <input
             type="text"
             className="form-control"
@@ -145,7 +140,7 @@ const JobsList = () => {
 
         {/* Job Type Filter */}
         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600' }}>Type:</span>
+          <span style={{ fontSize: '0.85rem', color: '#5D706B', fontWeight: '600' }}>Type:</span>
           <select
             className="form-control"
             value={selectedType}
@@ -162,12 +157,12 @@ const JobsList = () => {
 
       {/* Jobs Grid */}
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '4rem', color: '#94a3b8' }}>Loading matched tech jobs...</div>
+        <div style={{ textAlign: 'center', padding: '4rem', color: '#5D706B' }}>Loading matched tech jobs...</div>
       ) : filteredJobs.length === 0 ? (
-        <div className="card glass-panel" style={{ textAlign: 'center', padding: '3rem' }}>
-          <Briefcase size={40} color="#64748b" style={{ margin: '0 auto 1rem' }} />
-          <h3>No matching jobs found</h3>
-          <p style={{ color: '#94a3b8', marginTop: '0.5rem' }}>Try clearing or adjusting your search filters.</p>
+        <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
+          <Briefcase size={40} color="#839791" style={{ margin: '0 auto 1rem' }} />
+          <h3 style={{ color: '#063B32' }}>No matching jobs found</h3>
+          <p style={{ color: '#5D706B', marginTop: '0.5rem' }}>Try clearing or adjusting your search filters.</p>
         </div>
       ) : (
         <div style={{
@@ -180,7 +175,7 @@ const JobsList = () => {
             const hasApplied = job.hasApplied;
 
             return (
-              <div key={job._id} className="card glass-panel card-hover" style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
+              <div key={job._id} className="card card-hover" style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
                 
                 {/* Match Badge */}
                 {isAuthenticated && (
@@ -194,9 +189,9 @@ const JobsList = () => {
                     <span style={{
                       padding: '0.25rem 0.65rem',
                       borderRadius: 'var(--radius-full)',
-                      background: matchPct >= 70 ? 'rgba(16, 185, 129, 0.15)' : 'rgba(99, 102, 241, 0.15)',
-                      border: `1px solid ${matchPct >= 70 ? 'rgba(16, 185, 129, 0.35)' : 'rgba(99, 102, 241, 0.35)'}`,
-                      color: matchPct >= 70 ? '#10b981' : '#818cf8',
+                      background: '#EEF8F2',
+                      border: '1px solid #BDE0CB',
+                      color: '#159447',
                       fontSize: '0.78rem',
                       fontWeight: '700',
                       display: 'inline-flex',
@@ -214,44 +209,44 @@ const JobsList = () => {
                   </div>
                 )}
 
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.35rem' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: '700', color: '#063B32', marginBottom: '0.35rem' }}>
                   {job.title}
                 </h3>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#cbd5e1', fontSize: '0.9rem', marginBottom: '1rem' }}>
-                  <Building2 size={16} color="#6366f1" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#12332D', fontSize: '0.9rem', marginBottom: '1rem' }}>
+                  <Building2 size={16} color="#159447" />
                   <strong>{job.company}</strong>
                 </div>
 
-                <p style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.5', flex: 1, marginBottom: '1.25rem' }}>
+                <p style={{ color: '#5D706B', fontSize: '0.85rem', lineHeight: '1.55', flex: 1, marginBottom: '1.25rem' }}>
                   {job.description?.slice(0, 130)}...
                 </p>
 
                 {/* Specs Box */}
                 <div style={{
-                  padding: '0.75rem',
+                  padding: '0.75rem 1rem',
                   borderRadius: 'var(--radius-md)',
-                  background: 'rgba(255, 255, 255, 0.02)',
-                  border: '1px solid var(--border-color)',
+                  background: '#F8FCF9',
+                  border: '1px solid #D9E9DF',
                   marginBottom: '1.25rem',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '0.35rem',
                   fontSize: '0.82rem',
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#cbd5e1' }}>
-                    <MapPin size={14} color="#06b6d4" />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#12332D' }}>
+                    <MapPin size={14} color="#063B32" />
                     <span>{job.location}</span>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#cbd5e1' }}>
-                    <DollarSign size={14} color="#10b981" />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#12332D' }}>
+                    <DollarSign size={14} color="#159447" />
                     <span>{job.salary || job.salaryRange || 'Competitive'}</span>
                   </div>
                 </div>
 
                 {/* Required Skills Badges */}
                 <div style={{ marginBottom: '1.5rem' }}>
-                  <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
+                  <div style={{ fontSize: '0.75rem', color: '#839791', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
                     Required Stack ({job.requiredSkills?.length || 0})
                   </div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
@@ -262,15 +257,16 @@ const JobsList = () => {
                         <span
                           key={idx}
                           style={{
-                            padding: '0.15rem 0.5rem',
+                            padding: '0.2rem 0.5rem',
                             borderRadius: '4px',
                             fontSize: '0.75rem',
-                            background: isMastered ? 'rgba(16, 185, 129, 0.15)' : 'rgba(255, 255, 255, 0.05)',
-                            border: `1px solid ${isMastered ? 'rgba(16, 185, 129, 0.35)' : 'var(--border-color)'}`,
-                            color: isMastered ? '#10b981' : '#94a3b8',
+                            background: isMastered ? '#EEF8F2' : '#FFFFFF',
+                            border: `1px solid ${isMastered ? '#BDE0CB' : '#D9E9DF'}`,
+                            color: isMastered ? '#159447' : '#5D706B',
                             display: 'inline-flex',
                             alignItems: 'center',
                             gap: '0.2rem',
+                            fontWeight: isMastered ? '600' : '400',
                           }}
                         >
                           {isMastered && <Check size={11} />} {s}
@@ -287,9 +283,9 @@ const JobsList = () => {
                       type="button"
                       disabled
                       className="btn btn-outline btn-block"
-                      style={{ color: '#10b981', borderColor: 'rgba(16, 185, 129, 0.4)', opacity: 0.8 }}
+                      style={{ color: '#159447', borderColor: '#BDE0CB', background: '#EEF8F2' }}
                     >
-                      <CheckCircle2 size={16} /> Applied Successfully
+                      ✓ Applied
                     </button>
                   ) : (
                     <button
@@ -316,9 +312,9 @@ const JobsList = () => {
       >
         {selectedJobForModal && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            <div style={{ padding: '0.85rem', borderRadius: 'var(--radius-md)', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--border-color)' }}>
-              <h4 style={{ fontSize: '1.05rem', fontWeight: '700' }}>{selectedJobForModal.company}</h4>
-              <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>{selectedJobForModal.location} • {selectedJobForModal.salary || 'Competitive'}</p>
+            <div style={{ padding: '0.85rem 1rem', borderRadius: 'var(--radius-md)', background: '#F8FCF9', border: '1px solid #D9E9DF' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#063B32' }}>{selectedJobForModal.company}</h4>
+              <p style={{ color: '#5D706B', fontSize: '0.85rem' }}>{selectedJobForModal.location} • {selectedJobForModal.salary || 'Competitive'}</p>
             </div>
 
             <div>
@@ -326,7 +322,7 @@ const JobsList = () => {
               <textarea
                 className="form-control"
                 rows={4}
-                placeholder="Briefly describe why you are a great fit, your verified skills, or link your portfolio..."
+                placeholder="Briefly describe why you are a great fit, highlight your verified skills, or link your portfolio..."
                 value={applicationNotes}
                 onChange={(e) => setApplicationNotes(e.target.value)}
               />

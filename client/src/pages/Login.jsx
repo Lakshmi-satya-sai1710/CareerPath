@@ -44,15 +44,17 @@ const Login = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '2rem 1rem',
+      padding: '2.5rem 1rem',
+      background: '#F8FCF9',
     }}>
-      <div className="card glass-panel" style={{
+      <div className="card" style={{
         width: '100%',
         maxWidth: '440px',
         padding: '2.5rem 2rem',
-        borderRadius: 'var(--radius-xl)',
-        boxShadow: 'var(--shadow-xl)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
+        borderRadius: '20px',
+        boxShadow: 'var(--shadow-lg)',
+        border: '1px solid #D9E9DF',
+        background: '#FFFFFF',
       }}>
         
         {/* Logo & Title */}
@@ -61,32 +63,32 @@ const Login = () => {
             width: '48px',
             height: '48px',
             borderRadius: '12px',
-            background: 'var(--gradient-primary)',
+            background: 'linear-gradient(135deg, #063B32 0%, #159447 100%)',
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
             marginBottom: '1rem',
-            boxShadow: '0 4px 16px rgba(99, 102, 241, 0.35)',
+            boxShadow: '0 4px 14px rgba(21, 148, 71, 0.25)',
           }}>
             <Compass size={26} color="#ffffff" />
           </div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: '800', marginBottom: '0.35rem' }}>
+          <h1 style={{ fontSize: '1.75rem', fontWeight: '800', color: '#063B32', marginBottom: '0.35rem' }}>
             Welcome Back
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
-            Sign in to continue your career acceleration journey
+          <p style={{ color: '#5D706B', fontSize: '0.9rem' }}>
+            Sign in to continue your career roadmap journey
           </p>
         </div>
 
         {/* Quick Demo Fill Buttons */}
         <div style={{
-          background: 'rgba(99, 102, 241, 0.08)',
-          border: '1px dashed rgba(99, 102, 241, 0.3)',
+          background: '#EEF8F2',
+          border: '1px dashed #BDE0CB',
           borderRadius: 'var(--radius-md)',
           padding: '0.85rem',
           marginBottom: '1.5rem',
         }}>
-          <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#818cf8', textTransform: 'uppercase', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+          <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#159447', textTransform: 'uppercase', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
             <Sparkles size={13} /> Quick Demo Logins
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
@@ -98,17 +100,17 @@ const Login = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.35rem',
-                padding: '0.45rem',
-                fontSize: '0.78rem',
+                padding: '0.5rem',
+                fontSize: '0.8rem',
                 fontWeight: '600',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid var(--border-color)',
+                background: '#FFFFFF',
+                border: '1px solid #D9E9DF',
                 borderRadius: '6px',
-                color: '#cbd5e1',
+                color: '#12332D',
                 cursor: 'pointer',
               }}
             >
-              <UserCheck size={14} color="#10b981" /> Demo Student
+              <UserCheck size={14} color="#159447" /> Demo Student
             </button>
             <button
               type="button"
@@ -118,17 +120,17 @@ const Login = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.35rem',
-                padding: '0.45rem',
-                fontSize: '0.78rem',
+                padding: '0.5rem',
+                fontSize: '0.8rem',
                 fontWeight: '600',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid var(--border-color)',
+                background: '#FFFFFF',
+                border: '1px solid #D9E9DF',
                 borderRadius: '6px',
-                color: '#cbd5e1',
+                color: '#12332D',
                 cursor: 'pointer',
               }}
             >
-              <Shield size={14} color="#f59e0b" /> Demo Admin
+              <Shield size={14} color="#063B32" /> Demo Admin
             </button>
           </div>
         </div>
@@ -148,7 +150,7 @@ const Login = () => {
                 required
                 style={{ paddingLeft: '2.5rem' }}
               />
-              <Mail size={16} color="#64748b" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
+              <Mail size={16} color="#839791" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
             </div>
           </div>
 
@@ -167,7 +169,7 @@ const Login = () => {
                 required
                 style={{ paddingLeft: '2.5rem' }}
               />
-              <Lock size={16} color="#64748b" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
+              <Lock size={16} color="#839791" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
             </div>
           </div>
 
@@ -183,9 +185,9 @@ const Login = () => {
         </form>
 
         {/* Footer Link */}
-        <div style={{ textAlign: 'center', marginTop: '1.75rem', fontSize: '0.85rem', color: '#94a3b8' }}>
+        <div style={{ textAlign: 'center', marginTop: '1.75rem', fontSize: '0.85rem', color: '#5D706B' }}>
           Don't have an account yet?{' '}
-          <Link to="/register" style={{ color: '#818cf8', fontWeight: '600' }}>
+          <Link to="/register" style={{ color: '#159447', fontWeight: '700' }}>
             Create an Account
           </Link>
         </div>

@@ -61,7 +61,6 @@ const Profile = () => {
       setSkills(user.skills || []);
     }
 
-    // Load available skills & careers
     api.get('/skills').then((res) => {
       if (res.data.success) setAvailableSkills(res.data.skills);
     });
@@ -132,11 +131,11 @@ const Profile = () => {
       
       {/* Header */}
       <div>
-        <span className="badge badge-primary" style={{ marginBottom: '0.5rem' }}>Personal Settings</span>
-        <h1 style={{ fontSize: '2.25rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
+        <span className="section-tag">PERSONAL SETTINGS</span>
+        <h1 className="section-title">
           Profile & Skill Portfolio
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: '1rem', marginTop: '0.35rem' }}>
+        <p className="section-subtitle" style={{ marginTop: '0.35rem' }}>
           Keep your skills and academic information updated to receive precise roadmap recommendations.
         </p>
       </div>
@@ -145,8 +144,8 @@ const Profile = () => {
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         
         {/* Basic Info Card */}
-        <div className="card glass-panel" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: '700', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
+        <div className="card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: '700', color: '#063B32', borderBottom: '1px solid #D9E9DF', paddingBottom: '0.75rem' }}>
             Personal & Academic Information
           </h2>
 
@@ -170,7 +169,7 @@ const Profile = () => {
                 className="form-control"
                 value={formData.email}
                 disabled
-                style={{ opacity: 0.6 }}
+                style={{ background: '#F8FCF9', color: '#5D706B' }}
               />
             </div>
 
@@ -252,8 +251,8 @@ const Profile = () => {
         </div>
 
         {/* Links Card */}
-        <div className="card glass-panel" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: '700', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
+        <div className="card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: '700', color: '#063B32', borderBottom: '1px solid #D9E9DF', paddingBottom: '0.75rem' }}>
             Social & Portfolio Profiles
           </h2>
 
@@ -297,8 +296,8 @@ const Profile = () => {
         </div>
 
         {/* Manage Skills Card */}
-        <div className="card glass-panel" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: '700', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
+        <div className="card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: '700', color: '#063B32', borderBottom: '1px solid #D9E9DF', paddingBottom: '0.75rem' }}>
             Verified & Acquired Skills ({skills.length})
           </h2>
 
@@ -308,11 +307,11 @@ const Profile = () => {
               <div
                 key={idx}
                 style={{
-                  padding: '0.4rem 0.75rem',
+                  padding: '0.4rem 0.85rem',
                   borderRadius: 'var(--radius-full)',
-                  background: 'rgba(99, 102, 241, 0.15)',
-                  border: '1px solid rgba(99, 102, 241, 0.3)',
-                  color: '#818cf8',
+                  background: '#EEF8F2',
+                  border: '1px solid #BDE0CB',
+                  color: '#159447',
                   fontSize: '0.85rem',
                   fontWeight: '600',
                   display: 'flex',
@@ -324,7 +323,7 @@ const Profile = () => {
                 <button
                   type="button"
                   onClick={() => handleRemoveSkill(skill)}
-                  style={{ background: 'transparent', border: 'none', color: '#f87171', cursor: 'pointer', padding: 0, display: 'flex' }}
+                  style={{ background: 'transparent', border: 'none', color: '#DC2626', cursor: 'pointer', padding: 0, display: 'flex' }}
                 >
                   <X size={14} />
                 </button>
@@ -332,7 +331,7 @@ const Profile = () => {
             ))}
 
             {skills.length === 0 && (
-              <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>No skills added yet. Add your current skills below or complete quizzes.</p>
+              <p style={{ color: '#5D706B', fontSize: '0.85rem' }}>No skills added yet. Add your current skills below or complete quizzes.</p>
             )}
           </div>
 
@@ -363,7 +362,7 @@ const Profile = () => {
           {/* Quick Add Suggestions */}
           {availableSkills.length > 0 && (
             <div>
-              <span style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: '700', textTransform: 'uppercase' }}>Popular Suggestions:</span>
+              <span style={{ fontSize: '0.78rem', color: '#839791', fontWeight: '700', textTransform: 'uppercase' }}>Popular Suggestions:</span>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginTop: '0.4rem' }}>
                 {availableSkills.slice(0, 10).map((s) => {
                   const sName = s.name || s;
@@ -379,9 +378,9 @@ const Profile = () => {
                         padding: '0.2rem 0.55rem',
                         borderRadius: '4px',
                         fontSize: '0.75rem',
-                        background: 'rgba(255, 255, 255, 0.04)',
-                        border: '1px solid var(--border-color)',
-                        color: '#94a3b8',
+                        background: '#F8FCF9',
+                        border: '1px solid #D9E9DF',
+                        color: '#5D706B',
                         cursor: 'pointer',
                       }}
                     >

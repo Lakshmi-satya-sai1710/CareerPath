@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Compass, Mail, Lock, User, Target, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Compass, Mail, Lock, User, Target, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 
@@ -55,14 +55,16 @@ const Register = () => {
       alignItems: 'center',
       justifyContent: 'center',
       padding: '2.5rem 1rem',
+      background: '#F8FCF9',
     }}>
-      <div className="card glass-panel" style={{
+      <div className="card" style={{
         width: '100%',
         maxWidth: '520px',
         padding: '2.5rem 2rem',
-        borderRadius: 'var(--radius-xl)',
-        boxShadow: 'var(--shadow-xl)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
+        borderRadius: '20px',
+        boxShadow: 'var(--shadow-lg)',
+        border: '1px solid #D9E9DF',
+        background: '#FFFFFF',
       }}>
         
         {/* Header */}
@@ -71,19 +73,19 @@ const Register = () => {
             width: '48px',
             height: '48px',
             borderRadius: '12px',
-            background: 'var(--gradient-primary)',
+            background: 'linear-gradient(135deg, #063B32 0%, #159447 100%)',
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
             marginBottom: '1rem',
-            boxShadow: '0 4px 16px rgba(99, 102, 241, 0.35)',
+            boxShadow: '0 4px 14px rgba(21, 148, 71, 0.25)',
           }}>
             <Compass size={26} color="#ffffff" />
           </div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: '800', marginBottom: '0.35rem' }}>
+          <h1 style={{ fontSize: '1.75rem', fontWeight: '800', color: '#063B32', marginBottom: '0.35rem' }}>
             Start Your Journey
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
+          <p style={{ color: '#5D706B', fontSize: '0.9rem' }}>
             Create an account to personalize your tech career roadmap
           </p>
         </div>
@@ -106,7 +108,7 @@ const Register = () => {
                 required
                 style={{ paddingLeft: '2.5rem' }}
               />
-              <User size={16} color="#64748b" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
+              <User size={16} color="#839791" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
             </div>
           </div>
 
@@ -125,7 +127,7 @@ const Register = () => {
                 required
                 style={{ paddingLeft: '2.5rem' }}
               />
-              <Mail size={16} color="#64748b" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
+              <Mail size={16} color="#839791" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
             </div>
           </div>
 
@@ -145,7 +147,7 @@ const Register = () => {
                 minLength={6}
                 style={{ paddingLeft: '2.5rem' }}
               />
-              <Lock size={16} color="#64748b" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
+              <Lock size={16} color="#839791" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
             </div>
           </div>
 
@@ -182,9 +184,9 @@ const Register = () => {
                     fontWeight: '600',
                     borderRadius: 'var(--radius-md)',
                     border: '1px solid',
-                    borderColor: formData.experienceLevel === lvl ? '#6366f1' : 'var(--border-color)',
-                    background: formData.experienceLevel === lvl ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.02)',
-                    color: formData.experienceLevel === lvl ? '#f8fafc' : '#94a3b8',
+                    borderColor: formData.experienceLevel === lvl ? '#159447' : '#D9E9DF',
+                    background: formData.experienceLevel === lvl ? '#EEF8F2' : '#FFFFFF',
+                    color: formData.experienceLevel === lvl ? '#159447' : '#5D706B',
                     cursor: 'pointer',
                     transition: 'all 0.2s',
                   }}
@@ -207,9 +209,9 @@ const Register = () => {
         </form>
 
         {/* Footer Link */}
-        <div style={{ textAlign: 'center', marginTop: '1.75rem', fontSize: '0.85rem', color: '#94a3b8' }}>
+        <div style={{ textAlign: 'center', marginTop: '1.75rem', fontSize: '0.85rem', color: '#5D706B' }}>
           Already have an account?{' '}
-          <Link to="/login" style={{ color: '#818cf8', fontWeight: '600' }}>
+          <Link to="/login" style={{ color: '#159447', fontWeight: '700' }}>
             Sign In
           </Link>
         </div>

@@ -6,13 +6,7 @@ import {
   Briefcase, 
   Send, 
   CheckSquare, 
-  Plus, 
-  Clock, 
-  CheckCircle2, 
-  AlertCircle,
-  Building2,
-  TrendingUp,
-  Layers
+  Plus
 } from 'lucide-react';
 import api from '../services/api';
 import { useToast } from '../context/ToastContext';
@@ -106,7 +100,7 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="container" style={{ padding: '4rem 0', textAlign: 'center', color: '#94a3b8' }}>
+      <div className="container" style={{ padding: '4rem 0', textAlign: 'center', color: '#5D706B' }}>
         <p>Loading Admin intelligence portal...</p>
       </div>
     );
@@ -120,10 +114,10 @@ const AdminDashboard = () => {
       {/* Header */}
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: '#f59e0b', fontSize: '0.85rem', fontWeight: '700', marginBottom: '0.4rem' }}>
-            <ShieldAlert size={16} /> Admin Command Center
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: '#B45309', fontSize: '0.85rem', fontWeight: '800', marginBottom: '0.4rem' }}>
+            <ShieldAlert size={16} /> ADMIN COMMAND CENTER
           </div>
-          <h1 style={{ fontSize: '2.25rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
+          <h1 className="section-title">
             Platform Administration
           </h1>
         </div>
@@ -143,70 +137,70 @@ const AdminDashboard = () => {
         gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
         gap: '1rem',
       }}>
-        <div className="card glass-panel" style={{ padding: '1.25rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#6366f1', marginBottom: '0.5rem' }}>
+        <div className="card" style={{ padding: '1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#159447', marginBottom: '0.5rem' }}>
             <Users size={18} />
-            <span style={{ fontSize: '0.85rem', fontWeight: '600' }}>Enrolled Students</span>
+            <span style={{ fontSize: '0.85rem', fontWeight: '700' }}>Enrolled Students</span>
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#f8fafc' }}>
+          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#063B32' }}>
             {s.totalStudents || 0}
           </div>
         </div>
 
-        <div className="card glass-panel" style={{ padding: '1.25rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#06b6d4', marginBottom: '0.5rem' }}>
+        <div className="card" style={{ padding: '1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#063B32', marginBottom: '0.5rem' }}>
             <Compass size={18} />
-            <span style={{ fontSize: '0.85rem', fontWeight: '600' }}>Active Careers</span>
+            <span style={{ fontSize: '0.85rem', fontWeight: '700' }}>Active Careers</span>
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#f8fafc' }}>
+          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#063B32' }}>
             {s.totalCareers || 0}
           </div>
         </div>
 
-        <div className="card glass-panel" style={{ padding: '1.25rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#10b981', marginBottom: '0.5rem' }}>
+        <div className="card" style={{ padding: '1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#159447', marginBottom: '0.5rem' }}>
             <Briefcase size={18} />
-            <span style={{ fontSize: '0.85rem', fontWeight: '600' }}>Job Openings</span>
+            <span style={{ fontSize: '0.85rem', fontWeight: '700' }}>Job Openings</span>
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#f8fafc' }}>
+          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#063B32' }}>
             {s.totalJobs || 0}
           </div>
         </div>
 
-        <div className="card glass-panel" style={{ padding: '1.25rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#f59e0b', marginBottom: '0.5rem' }}>
+        <div className="card" style={{ padding: '1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#B45309', marginBottom: '0.5rem' }}>
             <Send size={18} />
-            <span style={{ fontSize: '0.85rem', fontWeight: '600' }}>Applications</span>
+            <span style={{ fontSize: '0.85rem', fontWeight: '700' }}>Applications</span>
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#f8fafc' }}>
+          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#063B32' }}>
             {s.totalApplications || 0}
           </div>
         </div>
 
-        <div className="card glass-panel" style={{ padding: '1.25rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ec4899', marginBottom: '0.5rem' }}>
+        <div className="card" style={{ padding: '1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#0369A1', marginBottom: '0.5rem' }}>
             <CheckSquare size={18} />
-            <span style={{ fontSize: '0.85rem', fontWeight: '600' }}>Quiz Submissions</span>
+            <span style={{ fontSize: '0.85rem', fontWeight: '700' }}>Quiz Submissions</span>
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#f8fafc' }}>
+          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#063B32' }}>
             {s.totalAssessmentAttempts || 0}
           </div>
         </div>
       </div>
 
       {/* Applications Pipeline Management */}
-      <div className="card glass-panel" style={{ padding: '2rem' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '1.25rem' }}>
+      <div className="card" style={{ padding: '2rem' }}>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: '700', color: '#063B32', marginBottom: '1.25rem' }}>
           Student Job Applications Pipeline ({allApplications.length})
         </h2>
 
         {allApplications.length === 0 ? (
-          <p style={{ color: '#94a3b8' }}>No job applications submitted yet.</p>
+          <p style={{ color: '#5D706B' }}>No job applications submitted yet.</p>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
               <thead>
-                <tr style={{ borderBottom: '1px solid var(--border-color)', color: '#94a3b8', textAlign: 'left' }}>
+                <tr style={{ borderBottom: '1px solid #D9E9DF', color: '#5D706B', textAlign: 'left' }}>
                   <th style={{ padding: '0.75rem 0.5rem' }}>Student</th>
                   <th style={{ padding: '0.75rem 0.5rem' }}>Role & Company</th>
                   <th style={{ padding: '0.75rem 0.5rem' }}>Applied Date</th>
@@ -216,16 +210,16 @@ const AdminDashboard = () => {
               </thead>
               <tbody>
                 {allApplications.map((app) => (
-                  <tr key={app._id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                  <tr key={app._id} style={{ borderBottom: '1px solid #EBF4EE' }}>
                     <td style={{ padding: '0.85rem 0.5rem' }}>
-                      <div style={{ fontWeight: '600', color: '#f8fafc' }}>{app.student?.name || 'Student'}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{app.student?.email}</div>
+                      <div style={{ fontWeight: '600', color: '#063B32' }}>{app.student?.name || 'Student'}</div>
+                      <div style={{ fontSize: '0.75rem', color: '#5D706B' }}>{app.student?.email}</div>
                     </td>
                     <td style={{ padding: '0.85rem 0.5rem' }}>
-                      <div style={{ fontWeight: '600', color: '#f8fafc' }}>{app.job?.title}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#6366f1' }}>{app.job?.company}</div>
+                      <div style={{ fontWeight: '600', color: '#12332D' }}>{app.job?.title}</div>
+                      <div style={{ fontSize: '0.75rem', color: '#159447', fontWeight: '600' }}>{app.job?.company}</div>
                     </td>
-                    <td style={{ padding: '0.85rem 0.5rem', color: '#94a3b8' }}>
+                    <td style={{ padding: '0.85rem 0.5rem', color: '#5D706B' }}>
                       {new Date(app.appliedDate || app.createdAt).toLocaleDateString()}
                     </td>
                     <td style={{ padding: '0.85rem 0.5rem' }}>
@@ -242,7 +236,7 @@ const AdminDashboard = () => {
                         className="form-control"
                         value={app.status}
                         onChange={(e) => handleUpdateAppStatus(app._id, e.target.value)}
-                        style={{ padding: '0.3rem 0.6rem', fontSize: '0.8rem', width: 'auto' }}
+                        style={{ padding: '0.35rem 0.65rem', fontSize: '0.8rem', width: 'auto' }}
                       >
                         <option value="Applied">Applied</option>
                         <option value="Under Review">Under Review</option>

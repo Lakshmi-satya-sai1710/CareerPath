@@ -14,7 +14,9 @@ import {
   LogOut, 
   Menu, 
   X,
-  ChevronDown
+  ChevronDown,
+  Search,
+  ArrowRight
 } from 'lucide-react';
 
 const Navbar = () => {
@@ -33,12 +35,12 @@ const Navbar = () => {
     display: 'flex',
     alignItems: 'center',
     gap: '0.4rem',
-    fontSize: '0.9rem',
-    fontWeight: '500',
-    color: isActive ? '#f8fafc' : '#94a3b8',
-    padding: '0.45rem 0.8rem',
+    fontSize: '0.925rem',
+    fontWeight: '600',
+    color: isActive ? '#159447' : '#12332D',
+    padding: '0.5rem 0.85rem',
     borderRadius: '8px',
-    background: isActive ? 'rgba(99, 102, 241, 0.12)' : 'transparent',
+    background: isActive ? '#EEF8F2' : 'transparent',
     transition: 'all 0.2s ease',
   });
 
@@ -47,76 +49,102 @@ const Navbar = () => {
       position: 'sticky',
       top: 0,
       zIndex: 1000,
-      background: 'rgba(11, 15, 25, 0.85)',
-      backdropFilter: 'blur(16px)',
-      borderBottom: '1px solid var(--border-color)',
+      background: '#FFFFFF',
+      borderBottom: '1px solid #D9E9DF',
+      boxShadow: '0 2px 10px rgba(18, 51, 45, 0.04)',
     }}>
       <div className="container" style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: '70px',
+        height: '76px',
       }}>
         {/* Brand Logo */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
           <div style={{
-            width: '38px',
-            height: '38px',
+            width: '40px',
+            height: '40px',
             borderRadius: '10px',
-            background: 'var(--gradient-primary)',
+            background: 'linear-gradient(135deg, #063B32 0%, #159447 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 4px 12px rgba(99, 102, 241, 0.4)',
+            boxShadow: '0 4px 12px rgba(21, 148, 71, 0.25)',
           }}>
             <Compass size={22} color="#ffffff" />
           </div>
-          <div>
-            <span style={{ fontSize: '1.25rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
-              Career<span className="title-gradient">Path</span>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <span style={{ fontSize: '1.35rem', fontWeight: '800', letterSpacing: '-0.5px', color: '#063B32', lineHeight: '1.1' }}>
+              Career<span style={{ color: '#159447' }}>Path</span>
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav style={{ display: 'none', gap: '0.25rem', alignItems: 'center' }} className="desktop-nav">
+        <nav style={{ display: 'none', gap: '0.35rem', alignItems: 'center' }} className="desktop-nav">
+          <NavLink to="/" style={navLinkStyle}>
+            Home
+          </NavLink>
           <NavLink to="/careers" style={navLinkStyle}>
-            <Compass size={16} /> Careers
+            Careers
+          </NavLink>
+          <NavLink to="/jobs" style={navLinkStyle}>
+            Jobs
+          </NavLink>
+          <NavLink to="/roadmap" style={navLinkStyle}>
+            Roadmaps
           </NavLink>
           {isAuthenticated && (
             <>
-              <NavLink to="/roadmap" style={navLinkStyle}>
-                <Map size={16} /> Roadmap
-              </NavLink>
               <NavLink to="/skill-gap" style={navLinkStyle}>
-                <Split size={16} /> Skill Gap
+                Skill Gap
               </NavLink>
               <NavLink to="/assessments" style={navLinkStyle}>
-                <CheckSquare size={16} /> Assessments
+                Assessments
               </NavLink>
             </>
-          )}
-          <NavLink to="/jobs" style={navLinkStyle}>
-            <Briefcase size={16} /> Jobs
-          </NavLink>
-          {isAuthenticated && (
-            <NavLink to="/applications" style={navLinkStyle}>
-              <Send size={16} /> Applications
-            </NavLink>
           )}
         </nav>
 
         {/* Right Action Area */}
-        <div style={{ display: 'none', alignItems: 'center', gap: '1rem' }} className="desktop-actions">
+        <div style={{ display: 'none', alignItems: 'center', gap: '0.75rem' }} className="desktop-actions">
+          {/* Search Trigger */}
+          <Link
+            to="/careers"
+            title="Search Careers & Skills"
+            style={{
+              width: '38px',
+              height: '38px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#5D706B',
+              background: '#F8FCF9',
+              border: '1px solid #D9E9DF',
+              transition: 'all 0.2s',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.color = '#159447';
+              e.currentTarget.style.borderColor = '#159447';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.color = '#5D706B';
+              e.currentTarget.style.borderColor = '#D9E9DF';
+            }}
+          >
+            <Search size={18} />
+          </Link>
+
           {isAuthenticated ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', position: 'relative' }}>
               {isAdmin && (
-                <Link to="/admin/dashboard" className="badge badge-warning" style={{ textDecoration: 'none', padding: '0.35rem 0.75rem', fontSize: '0.8rem' }}>
+                <Link to="/admin/dashboard" className="badge badge-warning" style={{ textDecoration: 'none', padding: '0.4rem 0.75rem', fontSize: '0.8rem' }}>
                   <ShieldAlert size={14} /> Admin Portal
                 </Link>
               )}
 
-              <Link to="/dashboard" className="btn btn-secondary btn-sm" style={{ padding: '0.45rem 0.9rem' }}>
+              <Link to="/dashboard" className="btn btn-secondary btn-sm" style={{ padding: '0.45rem 0.95rem' }}>
                 <LayoutDashboard size={15} /> Dashboard
               </Link>
 
@@ -127,17 +155,17 @@ const Navbar = () => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  padding: '0.35rem 0.6rem',
+                  padding: '0.35rem 0.65rem',
                   borderRadius: 'var(--radius-full)',
-                  background: 'rgba(255, 255, 255, 0.06)',
-                  border: '1px solid var(--border-color)',
+                  background: '#F8FCF9',
+                  border: '1px solid #D9E9DF',
                 }}
               >
                 <div style={{
-                  width: '30px',
-                  height: '30px',
+                  width: '32px',
+                  height: '32px',
                   borderRadius: '50%',
-                  background: 'var(--gradient-secondary)',
+                  background: 'linear-gradient(135deg, #159447 0%, #22A861 100%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -147,21 +175,21 @@ const Navbar = () => {
                 }}>
                   {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
                 </div>
-                <span style={{ fontSize: '0.85rem', fontWeight: '600', maxWidth: '110px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: '600', color: '#12332D', maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {user?.name?.split(' ')[0]}
                 </span>
-                <ChevronDown size={14} color="#94a3b8" />
+                <ChevronDown size={14} color="#5D706B" />
               </button>
 
               {/* User Dropdown Menu */}
               {userDropdownOpen && (
                 <div style={{
                   position: 'absolute',
-                  top: '120%',
+                  top: '125%',
                   right: 0,
-                  width: '210px',
-                  background: '#111827',
-                  border: '1px solid var(--border-color)',
+                  width: '220px',
+                  background: '#FFFFFF',
+                  border: '1px solid #D9E9DF',
                   borderRadius: 'var(--radius-md)',
                   boxShadow: 'var(--shadow-xl)',
                   padding: '0.5rem',
@@ -170,23 +198,36 @@ const Navbar = () => {
                   flexDirection: 'column',
                   gap: '0.25rem',
                 }}>
-                  <div style={{ padding: '0.5rem 0.75rem', borderBottom: '1px solid var(--border-color)', marginBottom: '0.25rem' }}>
-                    <p style={{ fontSize: '0.85rem', fontWeight: '600', color: '#f8fafc' }}>{user?.name}</p>
-                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user?.email}</p>
+                  <div style={{ padding: '0.5rem 0.75rem', borderBottom: '1px solid #EBF4EE', marginBottom: '0.25rem' }}>
+                    <p style={{ fontSize: '0.85rem', fontWeight: '700', color: '#063B32' }}>{user?.name}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#5D706B', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user?.email}</p>
                   </div>
                   <Link
                     to="/dashboard"
                     onClick={() => setUserDropdownOpen(false)}
-                    style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.75rem', fontSize: '0.85rem', color: '#cbd5e1', borderRadius: '6px' }}
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.75rem', fontSize: '0.85rem', color: '#12332D', borderRadius: '6px' }}
+                    onMouseOver={(e) => (e.currentTarget.style.background = '#EEF8F2')}
+                    onMouseOut={(e) => (e.currentTarget.style.background = 'transparent')}
                   >
-                    <LayoutDashboard size={15} /> Dashboard
+                    <LayoutDashboard size={15} color="#159447" /> Dashboard
                   </Link>
                   <Link
                     to="/profile"
                     onClick={() => setUserDropdownOpen(false)}
-                    style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.75rem', fontSize: '0.85rem', color: '#cbd5e1', borderRadius: '6px' }}
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.75rem', fontSize: '0.85rem', color: '#12332D', borderRadius: '6px' }}
+                    onMouseOver={(e) => (e.currentTarget.style.background = '#EEF8F2')}
+                    onMouseOut={(e) => (e.currentTarget.style.background = 'transparent')}
                   >
-                    <UserIcon size={15} /> Profile & Skills
+                    <UserIcon size={15} color="#159447" /> Profile & Skills
+                  </Link>
+                  <Link
+                    to="/applications"
+                    onClick={() => setUserDropdownOpen(false)}
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.75rem', fontSize: '0.85rem', color: '#12332D', borderRadius: '6px' }}
+                    onMouseOver={(e) => (e.currentTarget.style.background = '#EEF8F2')}
+                    onMouseOut={(e) => (e.currentTarget.style.background = 'transparent')}
+                  >
+                    <Send size={15} color="#159447" /> My Applications
                   </Link>
                   <button
                     onClick={handleLogout}
@@ -196,11 +237,13 @@ const Navbar = () => {
                       gap: '0.5rem',
                       padding: '0.5rem 0.75rem',
                       fontSize: '0.85rem',
-                      color: '#f87171',
+                      color: '#DC2626',
                       borderRadius: '6px',
                       width: '100%',
                       textAlign: 'left',
                     }}
+                    onMouseOver={(e) => (e.currentTarget.style.background = '#FEF2F2')}
+                    onMouseOut={(e) => (e.currentTarget.style.background = 'transparent')}
                   >
                     <LogOut size={15} /> Sign Out
                   </button>
@@ -209,89 +252,93 @@ const Navbar = () => {
             </div>
           ) : (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <Link to="/login" className="btn btn-secondary btn-sm">Sign In</Link>
-              <Link to="/register" className="btn btn-primary btn-sm">Get Started</Link>
+              <Link to="/login" className="btn btn-secondary" style={{ padding: '0.5rem 1.15rem' }}>
+                Log in
+              </Link>
+              <Link to="/register" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem' }}>
+                Get Started
+              </Link>
             </div>
           )}
         </div>
 
-        {/* Mobile Hamburger Toggle */}
+        {/* Mobile Hamburger Toggle Button */}
         <button
+          className="mobile-menu-btn"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          style={{ display: 'flex', color: '#f8fafc', padding: '0.5rem' }}
-          className="mobile-toggle"
+          style={{
+            display: 'none',
+            padding: '0.5rem',
+            color: '#12332D',
+            borderRadius: '8px',
+            background: '#F8FCF9',
+            border: '1px solid #D9E9DF',
+          }}
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Dropdown Navigation */}
       {mobileMenuOpen && (
         <div style={{
-          padding: '1rem 1.5rem 1.5rem',
-          background: '#0b0f19',
-          borderBottom: '1px solid var(--border-color)',
+          background: '#FFFFFF',
+          borderBottom: '1px solid #D9E9DF',
+          padding: '1.25rem 1.5rem',
           display: 'flex',
           flexDirection: 'column',
           gap: '0.75rem',
+          boxShadow: 'var(--shadow-lg)',
         }}>
-          <Link to="/careers" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', gap: '0.5rem', padding: '0.5rem' }}>
-            <Compass size={18} /> Careers
-          </Link>
-          {isAuthenticated && (
+          <NavLink to="/" onClick={() => setMobileMenuOpen(false)} style={navLinkStyle}>
+            Home
+          </NavLink>
+          <NavLink to="/careers" onClick={() => setMobileMenuOpen(false)} style={navLinkStyle}>
+            Careers
+          </NavLink>
+          <NavLink to="/jobs" onClick={() => setMobileMenuOpen(false)} style={navLinkStyle}>
+            Jobs
+          </NavLink>
+          <NavLink to="/roadmap" onClick={() => setMobileMenuOpen(false)} style={navLinkStyle}>
+            Roadmaps
+          </NavLink>
+          {isAuthenticated ? (
             <>
-              <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', gap: '0.5rem', padding: '0.5rem' }}>
-                <LayoutDashboard size={18} /> Student Dashboard
-              </Link>
-              <Link to="/roadmap" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', gap: '0.5rem', padding: '0.5rem' }}>
-                <Map size={18} /> Roadmap
-              </Link>
-              <Link to="/skill-gap" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', gap: '0.5rem', padding: '0.5rem' }}>
-                <Split size={18} /> Skill Gap
-              </Link>
-              <Link to="/assessments" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', gap: '0.5rem', padding: '0.5rem' }}>
-                <CheckSquare size={18} /> Assessments
-              </Link>
-              <Link to="/profile" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', gap: '0.5rem', padding: '0.5rem' }}>
-                <UserIcon size={18} /> Profile & Skills
-              </Link>
-            </>
-          )}
-          <Link to="/jobs" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', gap: '0.5rem', padding: '0.5rem' }}>
-            <Briefcase size={18} /> Jobs Portal
-          </Link>
-          {isAuthenticated && (
-            <Link to="/applications" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', gap: '0.5rem', padding: '0.5rem' }}>
-              <Send size={18} /> My Applications
-            </Link>
-          )}
-          {isAdmin && (
-            <Link to="/admin/dashboard" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', gap: '0.5rem', padding: '0.5rem', color: '#fbbf24' }}>
-              <ShieldAlert size={18} /> Admin Console
-            </Link>
-          )}
-          <div style={{ marginTop: '0.5rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-color)', display: 'flex', gap: '0.5rem' }}>
-            {isAuthenticated ? (
-              <button onClick={handleLogout} className="btn btn-danger btn-sm" style={{ width: '100%' }}>
-                <LogOut size={16} /> Sign Out
+              <NavLink to="/skill-gap" onClick={() => setMobileMenuOpen(false)} style={navLinkStyle}>
+                Skill Gap
+              </NavLink>
+              <NavLink to="/assessments" onClick={() => setMobileMenuOpen(false)} style={navLinkStyle}>
+                Assessments
+              </NavLink>
+              <NavLink to="/dashboard" onClick={() => setMobileMenuOpen(false)} style={navLinkStyle}>
+                Dashboard
+              </NavLink>
+              <NavLink to="/profile" onClick={() => setMobileMenuOpen(false)} style={navLinkStyle}>
+                Profile
+              </NavLink>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleLogout();
+                }}
+                className="btn btn-outline"
+                style={{ justifyContent: 'flex-start', color: '#DC2626', borderColor: '#FECACA' }}
+              >
+                <LogOut size={16} /> Log Out
               </button>
-            ) : (
-              <>
-                <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="btn btn-secondary btn-sm" style={{ flex: 1 }}>Sign In</Link>
-                <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="btn btn-primary btn-sm" style={{ flex: 1 }}>Get Started</Link>
-              </>
-            )}
-          </div>
+            </>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>
+              <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="btn btn-secondary btn-block">
+                Log in
+              </Link>
+              <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="btn btn-primary btn-block">
+                Get Started Free
+              </Link>
+            </div>
+          )}
         </div>
       )}
-
-      <style>{`
-        @media (min-width: 900px) {
-          .desktop-nav { display: flex !important; }
-          .desktop-actions { display: flex !important; }
-          .mobile-toggle { display: none !important; }
-        }
-      `}</style>
     </header>
   );
 };

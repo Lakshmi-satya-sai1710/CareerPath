@@ -25,8 +25,8 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = '550px' }) => {
       left: 0,
       right: 0,
       bottom: 0,
-      background: 'rgba(0, 0, 0, 0.75)',
-      backdropFilter: 'blur(8px)',
+      background: 'rgba(6, 59, 50, 0.45)',
+      backdropFilter: 'blur(6px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -34,18 +34,19 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = '550px' }) => {
       padding: '1.5rem',
     }} onClick={onClose}>
       <div
-        className="glass-panel"
+        className="card"
         style={{
           width: '100%',
           maxWidth,
           maxHeight: '90vh',
           display: 'flex',
           flexDirection: 'column',
-          background: '#111827',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
-          borderRadius: 'var(--radius-lg)',
-          boxShadow: 'var(--shadow-xl)',
+          background: '#FFFFFF',
+          border: '1px solid #D9E9DF',
+          borderRadius: '20px',
+          boxShadow: '0 25px 50px rgba(6, 59, 50, 0.25)',
           overflow: 'hidden',
+          padding: 0,
           animation: 'modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
         onClick={(e) => e.stopPropagation()}
@@ -56,15 +57,16 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = '550px' }) => {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '1.25rem 1.5rem',
-          borderBottom: '1px solid var(--border-color)',
+          borderBottom: '1px solid #D9E9DF',
+          background: '#F8FCF9',
         }}>
-          <h3 style={{ fontSize: '1.15rem', fontWeight: '700', color: '#f8fafc' }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: '700', color: '#063B32' }}>
             {title}
           </h3>
           <button
             onClick={onClose}
             style={{
-              color: '#94a3b8',
+              color: '#5D706B',
               display: 'flex',
               padding: '0.25rem',
               borderRadius: '6px',

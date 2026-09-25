@@ -7,17 +7,11 @@ import {
   ArrowRight, 
   CheckCircle2, 
   XCircle, 
-  Award, 
-  RotateCcw, 
-  HelpCircle,
-  Sparkles,
-  Map,
-  ShieldCheck
+  Map
 } from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
-import CircularProgress from '../components/CircularProgress';
 
 const AssessmentQuiz = () => {
   const { id } = useParams();
@@ -116,7 +110,7 @@ const AssessmentQuiz = () => {
 
   if (loading) {
     return (
-      <div className="container" style={{ padding: '4rem 0', textAlign: 'center', color: '#94a3b8' }}>
+      <div className="container" style={{ padding: '4rem 0', textAlign: 'center', color: '#5D706B' }}>
         <p>Loading assessment questions...</p>
       </div>
     );
@@ -125,7 +119,7 @@ const AssessmentQuiz = () => {
   if (!assessment || !assessment.questions || assessment.questions.length === 0) {
     return (
       <div className="container" style={{ padding: '4rem 0', textAlign: 'center' }}>
-        <h2>Assessment questions unavailable</h2>
+        <h2 style={{ color: '#063B32' }}>Assessment questions unavailable</h2>
         <Link to="/assessments" className="btn btn-primary" style={{ marginTop: '1rem' }}>
           Back to Assessments
         </Link>
@@ -148,33 +142,35 @@ const AssessmentQuiz = () => {
       <div className="container" style={{ padding: '2.5rem 0 4rem', display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '850px' }}>
         
         {/* Result Summary Banner */}
-        <div className="card glass-panel" style={{
+        <div className="card" style={{
           padding: '2.5rem',
-          borderRadius: 'var(--radius-xl)',
+          borderRadius: '20px',
           textAlign: 'center',
           background: passed
-            ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 182, 212, 0.08) 100%)'
-            : 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(245, 158, 11, 0.08) 100%)',
-          border: `1px solid ${passed ? 'rgba(16, 185, 129, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`,
+            ? 'linear-gradient(135deg, #063B32 0%, #159447 100%)'
+            : 'linear-gradient(135deg, #991B1B 0%, #DC2626 100%)',
+          color: '#FFFFFF',
+          border: 'none',
+          boxShadow: '0 10px 25px rgba(6, 59, 50, 0.15)',
         }}>
           <div style={{
             width: '64px',
             height: '64px',
             borderRadius: '50%',
-            background: passed ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)',
+            background: 'rgba(255, 255, 255, 0.2)',
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
             marginBottom: '1rem',
-            color: passed ? '#10b981' : '#ef4444',
+            color: '#FFFFFF',
           }}>
             {passed ? <CheckCircle2 size={36} /> : <XCircle size={36} />}
           </div>
 
-          <h1 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '0.35rem' }}>
+          <h1 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '0.35rem', color: '#FFFFFF' }}>
             {passed ? 'Assessment Passed!' : 'Assessment Completed'}
           </h1>
-          <p style={{ color: '#cbd5e1', fontSize: '1rem', marginBottom: '1.75rem' }}>
+          <p style={{ color: '#EEF8F2', fontSize: '1rem', marginBottom: '1.75rem', opacity: 0.95 }}>
             {passed
               ? `Skill verified! You achieved proficiency in ${assessment.skill}. Your roadmap & profile have been updated.`
               : `You scored ${submissionResult.percentage}%. Review the questions below to strengthen your gaps and try again.`}
@@ -186,46 +182,46 @@ const AssessmentQuiz = () => {
             alignItems: 'center',
             gap: '2.5rem',
             padding: '1.25rem',
-            borderRadius: 'var(--radius-md)',
-            background: 'rgba(0, 0, 0, 0.3)',
+            borderRadius: '12px',
+            background: 'rgba(0, 0, 0, 0.2)',
             maxWidth: '480px',
             margin: '0 auto 2rem',
           }}>
             <div>
-              <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Score</div>
-              <div style={{ fontSize: '1.6rem', fontWeight: '800', color: '#f8fafc' }}>
+              <div style={{ fontSize: '0.8rem', color: '#EEF8F2' }}>Score</div>
+              <div style={{ fontSize: '1.6rem', fontWeight: '800', color: '#FFFFFF' }}>
                 {submissionResult.score} / {submissionResult.totalQuestions}
               </div>
             </div>
-            <div style={{ borderLeft: '1px solid var(--border-color)', height: '40px' }} />
+            <div style={{ borderLeft: '1px solid rgba(255,255,255,0.2)', height: '40px' }} />
             <div>
-              <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Percentage</div>
-              <div style={{ fontSize: '1.6rem', fontWeight: '800', color: passed ? '#10b981' : '#f59e0b' }}>
+              <div style={{ fontSize: '0.8rem', color: '#EEF8F2' }}>Percentage</div>
+              <div style={{ fontSize: '1.6rem', fontWeight: '800', color: '#FFFFFF' }}>
                 {submissionResult.percentage}%
               </div>
             </div>
-            <div style={{ borderLeft: '1px solid var(--border-color)', height: '40px' }} />
+            <div style={{ borderLeft: '1px solid rgba(255,255,255,0.2)', height: '40px' }} />
             <div>
-              <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Proficiency</div>
-              <div style={{ fontSize: '1.1rem', fontWeight: '700', color: '#818cf8', marginTop: '0.2rem' }}>
+              <div style={{ fontSize: '0.8rem', color: '#EEF8F2' }}>Proficiency</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: '700', color: '#FFFFFF', marginTop: '0.2rem' }}>
                 {submissionResult.level}
               </div>
             </div>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link to="/assessments" className="btn btn-secondary">
+            <Link to="/assessments" className="btn btn-secondary" style={{ background: '#FFFFFF', color: '#063B32', border: 'none' }}>
               Back to Assessments
             </Link>
-            <Link to="/roadmap" className="btn btn-primary">
+            <Link to="/roadmap" className="btn btn-outline" style={{ color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.5)', background: 'rgba(255,255,255,0.1)' }}>
               <Map size={16} /> View Roadmap Progress
             </Link>
           </div>
         </div>
 
         {/* Question Review Breakdown */}
-        <div className="card glass-panel" style={{ padding: '2rem' }}>
-          <h2 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '1.5rem' }}>
+        <div className="card" style={{ padding: '2rem' }}>
+          <h2 style={{ fontSize: '1.3rem', fontWeight: '700', color: '#063B32', marginBottom: '1.5rem' }}>
             Detailed Question Explanations
           </h2>
 
@@ -236,17 +232,17 @@ const AssessmentQuiz = () => {
                 style={{
                   padding: '1.25rem',
                   borderRadius: 'var(--radius-md)',
-                  background: ans.isCorrect ? 'rgba(16, 185, 129, 0.04)' : 'rgba(239, 68, 68, 0.04)',
-                  border: `1px solid ${ans.isCorrect ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.25)'}`,
+                  background: ans.isCorrect ? '#EEF8F2' : '#FEF2F2',
+                  border: `1px solid ${ans.isCorrect ? '#BDE0CB' : '#FECACA'}`,
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
                   {ans.isCorrect ? (
-                    <CheckCircle2 size={18} color="#10b981" />
+                    <CheckCircle2 size={18} color="#159447" />
                   ) : (
-                    <XCircle size={18} color="#ef4444" />
+                    <XCircle size={18} color="#DC2626" />
                   )}
-                  <h4 style={{ fontSize: '1rem', fontWeight: '700', color: '#f8fafc' }}>
+                  <h4 style={{ fontSize: '1rem', fontWeight: '700', color: '#063B32' }}>
                     Q{idx + 1}: {ans.questionText}
                   </h4>
                 </div>
@@ -256,25 +252,25 @@ const AssessmentQuiz = () => {
                     const isSelected = ans.selectedOption === optIdx;
                     const isCorrect = ans.correctAnswer === optIdx;
 
-                    let bg = 'rgba(255, 255, 255, 0.02)';
-                    let border = 'var(--border-color)';
-                    let color = '#94a3b8';
+                    let bg = '#FFFFFF';
+                    let border = '#D9E9DF';
+                    let color = '#5D706B';
 
                     if (isCorrect) {
-                      bg = 'rgba(16, 185, 129, 0.15)';
-                      border = 'rgba(16, 185, 129, 0.4)';
-                      color = '#10b981';
+                      bg = '#EEF8F2';
+                      border = '#159447';
+                      color = '#159447';
                     } else if (isSelected && !ans.isCorrect) {
-                      bg = 'rgba(239, 68, 68, 0.15)';
-                      border = 'rgba(239, 68, 68, 0.4)';
-                      color = '#ef4444';
+                      bg = '#FEF2F2';
+                      border = '#DC2626';
+                      color = '#DC2626';
                     }
 
                     return (
                       <div
                         key={optIdx}
                         style={{
-                          padding: '0.6rem 0.85rem',
+                          padding: '0.65rem 0.85rem',
                           borderRadius: '6px',
                           background: bg,
                           border: `1px solid ${border}`,
@@ -283,6 +279,7 @@ const AssessmentQuiz = () => {
                           display: 'flex',
                           justifyContent: 'space-between',
                           alignItems: 'center',
+                          fontWeight: isCorrect || isSelected ? '600' : '400',
                         }}
                       >
                         <span>{opt}</span>
@@ -297,12 +294,12 @@ const AssessmentQuiz = () => {
                   <div style={{
                     padding: '0.6rem 0.85rem',
                     borderRadius: '6px',
-                    background: 'rgba(99, 102, 241, 0.08)',
-                    border: '1px solid rgba(99, 102, 241, 0.2)',
+                    background: '#FFFFFF',
+                    border: '1px solid #D9E9DF',
                     fontSize: '0.82rem',
-                    color: '#cbd5e1',
+                    color: '#5D706B',
                   }}>
-                    <strong style={{ color: '#818cf8' }}>Explanation: </strong>
+                    <strong style={{ color: '#063B32' }}>Explanation: </strong>
                     {ans.explanation}
                   </div>
                 )}
@@ -322,9 +319,9 @@ const AssessmentQuiz = () => {
     <div className="container" style={{ padding: '2.5rem 0 4rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '850px' }}>
       
       {/* Top Controls Bar */}
-      <div className="card glass-panel" style={{
+      <div className="card" style={{
         padding: '1.25rem 1.5rem',
-        borderRadius: 'var(--radius-lg)',
+        borderRadius: '16px',
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'center',
@@ -332,14 +329,14 @@ const AssessmentQuiz = () => {
         gap: '1rem',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <Link to="/assessments" style={{ color: '#94a3b8', display: 'flex' }}>
+          <Link to="/assessments" style={{ color: '#5D706B', display: 'flex' }}>
             <ArrowLeft size={18} />
           </Link>
           <div>
-            <h2 style={{ fontSize: '1.15rem', fontWeight: '700', color: '#f8fafc' }}>
+            <h2 style={{ fontSize: '1.15rem', fontWeight: '700', color: '#063B32' }}>
               {assessment.title}
             </h2>
-            <p style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+            <p style={{ fontSize: '0.8rem', color: '#5D706B' }}>
               Question {currentIndex + 1} of {totalQuestions}
             </p>
           </div>
@@ -352,9 +349,9 @@ const AssessmentQuiz = () => {
           gap: '0.4rem',
           padding: '0.4rem 0.85rem',
           borderRadius: 'var(--radius-full)',
-          background: timeLeft < 120 ? 'rgba(239, 68, 68, 0.15)' : 'rgba(99, 102, 241, 0.15)',
-          border: `1px solid ${timeLeft < 120 ? 'rgba(239, 68, 68, 0.4)' : 'rgba(99, 102, 241, 0.4)'}`,
-          color: timeLeft < 120 ? '#ef4444' : '#818cf8',
+          background: timeLeft < 120 ? '#FEF2F2' : '#EEF8F2',
+          border: `1px solid ${timeLeft < 120 ? '#FECACA' : '#BDE0CB'}`,
+          color: timeLeft < 120 ? '#DC2626' : '#159447',
           fontWeight: '700',
           fontSize: '0.9rem',
         }}>
@@ -369,18 +366,18 @@ const AssessmentQuiz = () => {
           const isCurrent = currentIndex === qIdx;
           const isAnswered = selectedAnswers[qIdx] !== undefined;
 
-          let bg = 'rgba(255, 255, 255, 0.05)';
-          let border = 'var(--border-color)';
-          let color = '#94a3b8';
+          let bg = '#FFFFFF';
+          let border = '#D9E9DF';
+          let color = '#5D706B';
 
           if (isCurrent) {
-            bg = '#6366f1';
-            border = '#6366f1';
-            color = '#ffffff';
+            bg = '#159447';
+            border = '#159447';
+            color = '#FFFFFF';
           } else if (isAnswered) {
-            bg = 'rgba(16, 185, 129, 0.2)';
-            border = '#10b981';
-            color = '#10b981';
+            bg = '#EEF8F2';
+            border = '#BDE0CB';
+            color = '#159447';
           }
 
           return (
@@ -389,8 +386,8 @@ const AssessmentQuiz = () => {
               type="button"
               onClick={() => setCurrentIndex(qIdx)}
               style={{
-                width: '32px',
-                height: '32px',
+                width: '34px',
+                height: '34px',
                 borderRadius: '8px',
                 background: bg,
                 border: `1px solid ${border}`,
@@ -398,6 +395,7 @@ const AssessmentQuiz = () => {
                 fontSize: '0.8rem',
                 fontWeight: '700',
                 cursor: 'pointer',
+                transition: 'all 0.2s',
               }}
             >
               {qIdx + 1}
@@ -407,16 +405,16 @@ const AssessmentQuiz = () => {
       </div>
 
       {/* Question Card */}
-      <div className="card glass-panel" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div className="card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span className="badge badge-primary">{assessment.skill}</span>
-          <span style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
+          <span style={{ fontSize: '0.82rem', color: '#5D706B' }}>
             {answeredCount} of {totalQuestions} answered
           </span>
         </div>
 
-        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', lineHeight: '1.5', color: '#f8fafc' }}>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', lineHeight: '1.5', color: '#063B32' }}>
           {currentQ.questionText}
         </h3>
 
@@ -432,8 +430,8 @@ const AssessmentQuiz = () => {
                 style={{
                   padding: '1rem 1.25rem',
                   borderRadius: 'var(--radius-md)',
-                  background: isSelected ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.02)',
-                  border: isSelected ? '1px solid #6366f1' : '1px solid var(--border-color)',
+                  background: isSelected ? '#EEF8F2' : '#FFFFFF',
+                  border: isSelected ? '2px solid #159447' : '1px solid #D9E9DF',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
@@ -442,22 +440,22 @@ const AssessmentQuiz = () => {
                 }}
               >
                 <div style={{
-                  width: '26px',
-                  height: '26px',
+                  width: '28px',
+                  height: '28px',
                   borderRadius: '50%',
-                  border: `2px solid ${isSelected ? '#6366f1' : '#64748b'}`,
-                  background: isSelected ? '#6366f1' : 'transparent',
+                  border: `2px solid ${isSelected ? '#159447' : '#D9E9DF'}`,
+                  background: isSelected ? '#159447' : '#F8FCF9',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: 'white',
-                  fontSize: '0.75rem',
+                  color: isSelected ? '#FFFFFF' : '#5D706B',
+                  fontSize: '0.8rem',
                   fontWeight: '700',
                   flexShrink: 0,
                 }}>
                   {String.fromCharCode(65 + optIdx)}
                 </div>
-                <span style={{ fontSize: '0.95rem', color: isSelected ? '#f8fafc' : '#cbd5e1', fontWeight: isSelected ? '600' : '400' }}>
+                <span style={{ fontSize: '0.95rem', color: isSelected ? '#063B32' : '#12332D', fontWeight: isSelected ? '700' : '400' }}>
                   {optionText}
                 </span>
               </div>
@@ -472,7 +470,7 @@ const AssessmentQuiz = () => {
           alignItems: 'center',
           marginTop: '1rem',
           paddingTop: '1.25rem',
-          borderTop: '1px solid var(--border-color)',
+          borderTop: '1px solid #D9E9DF',
         }}>
           <button
             type="button"
@@ -498,7 +496,6 @@ const AssessmentQuiz = () => {
               onClick={handleSubmit}
               disabled={isSubmitting}
               className="btn btn-primary"
-              style={{ background: 'var(--success)', borderColor: 'var(--success)' }}
             >
               {isSubmitting ? 'Scoring Answers...' : 'Submit Quiz'}
             </button>

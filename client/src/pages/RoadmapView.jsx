@@ -4,16 +4,13 @@ import {
   Map, 
   CheckCircle2, 
   Circle, 
-  Clock, 
   ExternalLink, 
   BookOpen, 
   ChevronDown, 
   ChevronUp, 
   Sparkles, 
-  Target, 
-  Award,
-  Layers,
-  ArrowRight
+  Split, 
+  CheckSquare
 } from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -40,7 +37,6 @@ const RoadmapView = () => {
       const response = await api.get(url);
       if (response.data.success) {
         setRoadmapData(response.data);
-        // Expand first 2 levels by default
         const initialExpanded = {};
         response.data.roadmap?.forEach((stage, idx) => {
           initialExpanded[stage.level] = idx < 2 || !stage.isCompleted;
@@ -57,7 +53,6 @@ const RoadmapView = () => {
   useEffect(() => {
     fetchRoadmap(careerIdQuery);
 
-    // Fetch all careers for switcher
     api.get('/careers').then((res) => {
       if (res.data.success) setCareersList(res.data.careers);
     });
@@ -80,7 +75,6 @@ const RoadmapView = () => {
 
       if (response.data.success) {
         addToast(`Marked ${skillName} as ${newStatus}!`, 'success');
-        // Refresh roadmap
         fetchRoadmap(roadmapData.career?._id);
       }
     } catch (err) {
@@ -92,7 +86,7 @@ const RoadmapView = () => {
 
   if (loading) {
     return (
-      <div className="container" style={{ padding: '4rem 0', textAlign: 'center', color: '#94a3b8' }}>
+      <div className="container" style={{ padding: '4rem 0', textAlign: 'center', color: '#5D706B' }}>
         <p>Generating interactive roadmap tree...</p>
       </div>
     );
@@ -101,8 +95,8 @@ const RoadmapView = () => {
   if (!roadmapData || !roadmapData.roadmap) {
     return (
       <div className="container" style={{ padding: '4rem 0', textAlign: 'center' }}>
-        <h2>No roadmap available</h2>
-        <p style={{ color: '#94a3b8', margin: '0.75rem 0 1.5rem' }}>Select a target career to generate your personalized learning tree.</p>
+        <h2 style={{ color: '#063B32' }}>No roadmap available</h2>
+        <p style={{ color: '#5D706B', margin: '0.75rem 0 1.5rem' }}>Select a target career to generate your personalized learning tree.</p>
         <Link to="/careers" className="btn btn-primary">Browse Careers</Link>
       </div>
     );
@@ -114,39 +108,41 @@ const RoadmapView = () => {
     <div className="container" style={{ padding: '2.5rem 0 4rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       
       {/* Roadmap Header Card */}
-      <div className="card glass-panel" style={{
-        padding: '2rem',
-        borderRadius: 'var(--radius-xl)',
-        background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(6, 182, 212, 0.08) 100%)',
-        border: '1px solid rgba(99, 102, 241, 0.25)',
+      <div className="card" style={{
+        padding: '2.25rem',
+        borderRadius: '20px',
+        background: 'linear-gradient(135deg, #063B32 0%, #159447 100%)',
+        color: '#FFFFFF',
+        boxShadow: '0 10px 25px rgba(6, 59, 50, 0.15)',
+        border: 'none',
       }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1.5rem' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-              <span className="badge badge-primary">{career?.category}</span>
-              <span className="badge badge-warning">{career?.difficulty}</span>
+              <span className="badge" style={{ background: '#EEF8F2', color: '#159447' }}>{career?.category}</span>
+              <span className="badge" style={{ background: 'rgba(255,255,255,0.2)', color: '#FFFFFF' }}>{career?.difficulty}</span>
               {roadmapData.isUserTargetCareer && (
-                <span className="badge badge-success">Your Active Target</span>
+                <span className="badge" style={{ background: '#22A861', color: '#FFFFFF' }}>Your Active Target</span>
               )}
             </div>
 
-            <h1 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.3rem)', fontWeight: '800', marginBottom: '0.5rem' }}>
+            <h1 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.3rem)', fontWeight: '800', marginBottom: '0.5rem', color: '#FFFFFF' }}>
               {career?.title} Roadmap
             </h1>
 
-            <p style={{ color: '#cbd5e1', fontSize: '0.95rem' }}>
+            <p style={{ color: '#EEF8F2', fontSize: '0.95rem', opacity: 0.95 }}>
               Track milestones, check off completed concepts, and level up across all 7 stages.
             </p>
           </div>
 
           {/* Progress Circular Widget */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', background: 'rgba(0,0,0,0.3)', padding: '1rem 1.5rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-color)' }}>
-            <CircularProgress percentage={overallProgress} size={64} strokeWidth={6} color="#6366f1" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', background: 'rgba(255, 255, 255, 0.15)', padding: '1rem 1.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.25)' }}>
+            <CircularProgress percentage={overallProgress} size={64} strokeWidth={6} color="#FFFFFF" />
             <div>
-              <div style={{ fontSize: '1.3rem', fontWeight: '800', color: '#f8fafc' }}>
+              <div style={{ fontSize: '1.35rem', fontWeight: '800', color: '#FFFFFF' }}>
                 {completedMilestones} / {totalMilestones}
               </div>
-              <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Milestones Done ({overallProgress}%)</div>
+              <div style={{ fontSize: '0.8rem', color: '#EEF8F2' }}>Milestones Done ({overallProgress}%)</div>
             </div>
           </div>
         </div>
@@ -160,15 +156,15 @@ const RoadmapView = () => {
           gap: '1rem',
           marginTop: '1.5rem',
           paddingTop: '1.25rem',
-          borderTop: '1px solid var(--border-color)',
+          borderTop: '1px solid rgba(255,255,255,0.2)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <span style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600' }}>Switch Path:</span>
+            <span style={{ fontSize: '0.85rem', color: '#EEF8F2', fontWeight: '600' }}>Switch Path:</span>
             <select
               className="form-control"
               value={career?._id}
               onChange={(e) => fetchRoadmap(e.target.value)}
-              style={{ width: 'auto', padding: '0.4rem 0.75rem', fontSize: '0.85rem' }}
+              style={{ width: 'auto', padding: '0.4rem 0.75rem', fontSize: '0.85rem', background: '#FFFFFF', color: '#12332D' }}
             >
               {careersList.map((c) => (
                 <option key={c._id} value={c._id}>{c.title}</option>
@@ -177,10 +173,10 @@ const RoadmapView = () => {
           </div>
 
           <div style={{ display: 'flex', gap: '0.75rem' }}>
-            <Link to="/skill-gap" className="btn btn-secondary btn-sm">
+            <Link to="/skill-gap" className="btn btn-secondary btn-sm" style={{ background: '#FFFFFF', color: '#063B32', border: 'none' }}>
               <Split size={14} /> Gap Analysis
             </Link>
-            <Link to="/assessments" className="btn btn-outline btn-sm">
+            <Link to="/assessments" className="btn btn-outline btn-sm" style={{ color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.1)' }}>
               <CheckSquare size={14} /> Quizzes
             </Link>
           </div>
@@ -196,12 +192,12 @@ const RoadmapView = () => {
           return (
             <div
               key={stage.level || idx}
-              className="card glass-panel"
+              className="card"
               style={{
-                borderRadius: 'var(--radius-lg)',
-                border: stageCompleted ? '1px solid rgba(16, 185, 129, 0.4)' : '1px solid var(--border-color)',
+                borderRadius: '16px',
+                border: stageCompleted ? '1px solid #BDE0CB' : '1px solid #D9E9DF',
                 overflow: 'hidden',
-                transition: 'var(--transition)',
+                padding: 0,
               }}
             >
               {/* Stage Accordion Header */}
@@ -213,7 +209,8 @@ const RoadmapView = () => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   cursor: 'pointer',
-                  background: stageCompleted ? 'rgba(16, 185, 129, 0.05)' : 'transparent',
+                  background: stageCompleted ? '#EEF8F2' : '#FFFFFF',
+                  borderBottom: isExpanded ? '1px solid #D9E9DF' : 'none',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -221,39 +218,40 @@ const RoadmapView = () => {
                     width: '38px',
                     height: '38px',
                     borderRadius: '10px',
-                    background: stageCompleted ? 'var(--success)' : 'var(--gradient-primary)',
-                    color: '#ffffff',
+                    background: stageCompleted ? '#159447' : '#EEF8F2',
+                    color: stageCompleted ? '#FFFFFF' : '#159447',
                     fontWeight: '800',
-                    fontSize: '1rem',
+                    fontSize: '0.95rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
+                    border: '1px solid #D9E9DF',
                   }}>
                     {stageCompleted ? <CheckCircle2 size={22} /> : `L${stage.level}`}
                   </div>
 
                   <div>
-                    <h3 style={{ fontSize: '1.15rem', fontWeight: '700', color: '#f8fafc', marginBottom: '0.2rem' }}>
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: '700', color: '#063B32', marginBottom: '0.2rem' }}>
                       Level {stage.level}: {stage.title}
                     </h3>
-                    <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
+                    <p style={{ color: '#5D706B', fontSize: '0.85rem' }}>
                       {stage.description}
                     </p>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <span style={{ fontSize: '0.8rem', color: stageCompleted ? '#10b981' : '#94a3b8', fontWeight: '600' }}>
+                  <span style={{ fontSize: '0.8rem', color: stageCompleted ? '#159447' : '#5D706B', fontWeight: '700' }}>
                     {stage.skills.filter((s) => s.status === 'Completed').length} / {stage.skills.length} Completed
                   </span>
-                  {isExpanded ? <ChevronUp size={20} color="#94a3b8" /> : <ChevronDown size={20} color="#94a3b8" />}
+                  {isExpanded ? <ChevronUp size={20} color="#5D706B" /> : <ChevronDown size={20} color="#5D706B" />}
                 </div>
               </div>
 
               {/* Stage Skills & Content (Expanded) */}
               {isExpanded && (
-                <div style={{ padding: '0 1.5rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', borderTop: '1px solid var(--border-color)', paddingTop: '1.25rem' }}>
+                <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', background: '#F8FCF9' }}>
                   {stage.skills.map((item, sIdx) => {
                     const isDone = item.status === 'Completed';
 
@@ -263,8 +261,8 @@ const RoadmapView = () => {
                         style={{
                           padding: '1.25rem',
                           borderRadius: 'var(--radius-md)',
-                          background: isDone ? 'rgba(16, 185, 129, 0.04)' : 'rgba(255, 255, 255, 0.02)',
-                          border: isDone ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid var(--border-color)',
+                          background: isDone ? '#EEF8F2' : '#FFFFFF',
+                          border: isDone ? '1px solid #BDE0CB' : '1px solid #D9E9DF',
                           display: 'flex',
                           flexWrap: 'wrap',
                           alignItems: 'flex-start',
@@ -287,15 +285,15 @@ const RoadmapView = () => {
                             }}
                           >
                             {isDone ? (
-                              <CheckCircle2 size={24} color="#10b981" />
+                              <CheckCircle2 size={24} color="#159447" />
                             ) : (
-                              <Circle size={24} color="#64748b" />
+                              <Circle size={24} color="#839791" />
                             )}
                           </button>
 
                           <div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-                              <h4 style={{ fontSize: '1rem', fontWeight: '700', textDecoration: isDone ? 'line-through' : 'none', color: isDone ? '#94a3b8' : '#f8fafc' }}>
+                              <h4 style={{ fontSize: '1rem', fontWeight: '700', textDecoration: isDone ? 'line-through' : 'none', color: isDone ? '#5D706B' : '#063B32' }}>
                                 {item.skill}
                               </h4>
                               <span className={`badge ${isDone ? 'badge-success' : 'badge-primary'}`} style={{ fontSize: '0.72rem' }}>
@@ -303,14 +301,14 @@ const RoadmapView = () => {
                               </span>
                             </div>
 
-                            <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: '1.5', marginBottom: '0.75rem' }}>
+                            <p style={{ fontSize: '0.85rem', color: '#5D706B', lineHeight: '1.5', marginBottom: '0.75rem' }}>
                               {item.description}
                             </p>
 
                             {/* Learning Resources Links */}
                             {item.resources && item.resources.length > 0 && (
                               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
-                                <span style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '700', textTransform: 'uppercase' }}>Resources:</span>
+                                <span style={{ fontSize: '0.75rem', color: '#839791', fontWeight: '700', textTransform: 'uppercase' }}>Resources:</span>
                                 {item.resources.map((res, rIdx) => (
                                   <a
                                     key={rIdx}
@@ -324,9 +322,10 @@ const RoadmapView = () => {
                                       fontSize: '0.75rem',
                                       padding: '0.2rem 0.5rem',
                                       borderRadius: '4px',
-                                      background: 'rgba(99, 102, 241, 0.1)',
-                                      border: '1px solid rgba(99, 102, 241, 0.25)',
-                                      color: '#818cf8',
+                                      background: '#FFFFFF',
+                                      border: '1px solid #D9E9DF',
+                                      color: '#159447',
+                                      fontWeight: '600',
                                       textDecoration: 'none',
                                     }}
                                   >
@@ -344,7 +343,7 @@ const RoadmapView = () => {
                             type="button"
                             onClick={() => handleToggleSkill(item.skill, item.status)}
                             disabled={updatingSkill === item.skill}
-                            className={`btn btn-sm ${isDone ? 'btn-outline' : 'btn-secondary'}`}
+                            className={`btn btn-sm ${isDone ? 'btn-outline' : 'btn-primary'}`}
                             style={{ minWidth: '130px' }}
                           >
                             {isDone ? 'Mark Incomplete' : 'Mark Completed'}

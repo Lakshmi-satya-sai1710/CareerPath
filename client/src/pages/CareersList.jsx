@@ -96,21 +96,21 @@ const CareersList = () => {
       
       {/* Header */}
       <div>
-        <span className="badge badge-primary" style={{ marginBottom: '0.5rem' }}>Explore Tracks</span>
-        <h1 style={{ fontSize: '2.25rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
+        <span className="section-tag">EXPLORE TRACKS</span>
+        <h1 className="section-title">
           Explore Tech Career Tracks
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: '1rem', maxWidth: '650px', marginTop: '0.35rem' }}>
+        <p className="section-subtitle" style={{ marginTop: '0.35rem' }}>
           Browse {careers.length} specialized career paths with full 7-level learning roadmaps, skill requirements, and market insights.
         </p>
       </div>
 
       {/* Filters & Search Toolbar */}
-      <div className="card glass-panel" style={{ padding: '1.25rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="card" style={{ padding: '1.25rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
         
         {/* Search */}
         <div style={{ position: 'relative', flex: '1 1 280px' }}>
-          <Search size={18} color="#64748b" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
+          <Search size={18} color="#839791" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
           <input
             type="text"
             className="form-control"
@@ -123,7 +123,7 @@ const CareersList = () => {
 
         {/* Category Filter */}
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600' }}>Category:</span>
+          <span style={{ fontSize: '0.85rem', color: '#5D706B', fontWeight: '600' }}>Category:</span>
           <select
             className="form-control"
             value={selectedCategory}
@@ -138,7 +138,7 @@ const CareersList = () => {
 
         {/* Difficulty Filter */}
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600' }}>Level:</span>
+          <span style={{ fontSize: '0.85rem', color: '#5D706B', fontWeight: '600' }}>Level:</span>
           <select
             className="form-control"
             value={selectedDifficulty}
@@ -155,12 +155,12 @@ const CareersList = () => {
 
       {/* Careers Grid */}
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '4rem', color: '#94a3b8' }}>Loading career tracks...</div>
+        <div style={{ textAlign: 'center', padding: '4rem', color: '#5D706B' }}>Loading career tracks...</div>
       ) : filteredCareers.length === 0 ? (
-        <div className="card glass-panel" style={{ textAlign: 'center', padding: '3rem' }}>
-          <Compass size={40} color="#64748b" style={{ margin: '0 auto 1rem' }} />
-          <h3>No matching career tracks found</h3>
-          <p style={{ color: '#94a3b8', marginTop: '0.5rem' }}>Try clearing your search query or filters.</p>
+        <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
+          <Compass size={40} color="#839791" style={{ margin: '0 auto 1rem' }} />
+          <h3 style={{ color: '#063B32' }}>No matching career tracks found</h3>
+          <p style={{ color: '#5D706B', marginTop: '0.5rem' }}>Try clearing your search query or filters.</p>
         </div>
       ) : (
         <div style={{
@@ -172,16 +172,16 @@ const CareersList = () => {
             const isTarget = user?.targetCareer === career._id || user?.targetCareer?._id === career._id;
 
             return (
-              <div key={career._id} className="card glass-panel card-hover" style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
+              <div key={career._id} className="card card-hover" style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
                 
                 {isTarget && (
                   <div style={{
                     position: 'absolute',
                     top: '1rem',
                     right: '1rem',
-                    background: 'rgba(16, 185, 129, 0.15)',
-                    border: '1px solid #10b981',
-                    color: '#10b981',
+                    background: '#EEF8F2',
+                    border: '1px solid #159447',
+                    color: '#159447',
                     borderRadius: 'var(--radius-full)',
                     padding: '0.2rem 0.6rem',
                     fontSize: '0.75rem',
@@ -199,42 +199,43 @@ const CareersList = () => {
                   <span className="badge badge-warning">{career.difficulty}</span>
                 </div>
 
-                <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '0.5rem' }}>
+                <h3 style={{ fontSize: '1.3rem', fontWeight: '700', color: '#063B32', marginBottom: '0.5rem' }}>
                   {career.title}
                 </h3>
 
-                <p style={{ color: '#94a3b8', fontSize: '0.875rem', lineHeight: '1.5', flex: 1, marginBottom: '1.25rem' }}>
+                <p style={{ color: '#5D706B', fontSize: '0.875rem', lineHeight: '1.55', flex: 1, marginBottom: '1.25rem' }}>
                   {career.description}
                 </p>
 
                 {/* Key Details */}
                 <div style={{
-                  background: 'rgba(255, 255, 255, 0.02)',
+                  background: '#F8FCF9',
+                  border: '1px solid #D9E9DF',
                   borderRadius: 'var(--radius-md)',
-                  padding: '0.75rem',
+                  padding: '0.75rem 1rem',
                   marginBottom: '1.25rem',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '0.4rem',
                   fontSize: '0.82rem',
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#cbd5e1' }}>
-                    <DollarSign size={14} color="#10b981" />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#12332D' }}>
+                    <DollarSign size={14} color="#159447" />
                     <strong>Salary:</strong> {career.averageSalary}
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#cbd5e1' }}>
-                    <Clock size={14} color="#06b6d4" />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#12332D' }}>
+                    <Clock size={14} color="#063B32" />
                     <strong>Duration:</strong> {career.estimatedDuration}
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#cbd5e1' }}>
-                    <TrendingUp size={14} color="#818cf8" />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#12332D' }}>
+                    <TrendingUp size={14} color="#159447" />
                     <strong>Outlook:</strong> {career.jobOutlook}
                   </div>
                 </div>
 
                 {/* Required Skills Badges */}
                 <div style={{ marginBottom: '1.5rem' }}>
-                  <div style={{ fontSize: '0.78rem', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#839791', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
                     Required Skills ({career.requiredSkills?.length || 0})
                   </div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
@@ -243,15 +244,16 @@ const CareersList = () => {
                         padding: '0.15rem 0.45rem',
                         borderRadius: '4px',
                         fontSize: '0.75rem',
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid var(--border-color)',
-                        color: '#94a3b8',
+                        background: '#FFFFFF',
+                        border: '1px solid #D9E9DF',
+                        color: '#12332D',
+                        fontWeight: '500',
                       }}>
                         {skill.name || skill}
                       </span>
                     ))}
                     {career.requiredSkills?.length > 5 && (
-                      <span style={{ fontSize: '0.75rem', color: '#64748b', alignSelf: 'center' }}>
+                      <span style={{ fontSize: '0.75rem', color: '#5D706B', alignSelf: 'center' }}>
                         +{career.requiredSkills.length - 5} more
                       </span>
                     )}
