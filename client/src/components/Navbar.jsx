@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { 
   Compass, 
@@ -15,8 +15,7 @@ import {
   Menu, 
   X,
   ChevronDown,
-  Search,
-  ArrowRight
+  Search
 } from 'lucide-react';
 
 const Navbar = () => {
@@ -24,11 +23,22 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
     setUserDropdownOpen(false);
     navigate('/login');
+  };
+
+  const handleAboutClick = (e) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      const el = document.getElementById('about');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/#about');
+    }
   };
 
   const navLinkStyle = ({ isActive }) => ({
@@ -94,6 +104,26 @@ const Navbar = () => {
           <NavLink to="/roadmap" style={navLinkStyle}>
             Roadmaps
           </NavLink>
+          <a
+            href="/#about"
+            onClick={handleAboutClick}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              fontSize: '0.925rem',
+              fontWeight: '600',
+              color: '#12332D',
+              padding: '0.5rem 0.85rem',
+              borderRadius: '8px',
+              transition: 'all 0.2s ease',
+              textDecoration: 'none',
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.color = '#159447')}
+            onMouseOut={(e) => (e.currentTarget.style.color = '#12332D')}
+          >
+            About
+          </a>
           {isAuthenticated && (
             <>
               <NavLink to="/skill-gap" style={navLinkStyle}>
@@ -302,6 +332,22 @@ const Navbar = () => {
           <NavLink to="/roadmap" onClick={() => setMobileMenuOpen(false)} style={navLinkStyle}>
             Roadmaps
           </NavLink>
+          <a
+            href="/#about"
+            onClick={(e) => {
+              setMobileMenuOpen(false);
+              handleAboutClick(e);
+            }}
+            style={{
+              padding: '0.5rem 0.85rem',
+              fontSize: '0.925rem',
+              fontWeight: '600',
+              color: '#12332D',
+              textDecoration: 'none',
+            }}
+          >
+            About
+          </a>
           {isAuthenticated ? (
             <>
               <NavLink to="/skill-gap" onClick={() => setMobileMenuOpen(false)} style={navLinkStyle}>
